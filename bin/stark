@@ -1,0 +1,57 @@
+#!/usr/bin/env ruby
+
+if RUBY_VERSION < '2.0.0'
+  abort "error: Stark requires Ruby 2.0.0 or higher."
+end
+
+if $PROGRAM_NAME == __FILE__
+  $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
+end
+require 'xcpretty'
+require 'optparse'
+
+report_options = []
+report_classes = []
+report_formats = {
+  "junit"                     => XCPretty::JUnit,
+  "html"                      => XCPretty::HTML,
+  "json-compilation-database" => XCPretty::JSONCompilationDatabase
+}
+
+printer_opts = {
+  unicode: XCPretty::Term.unicode?,
+  colorize: XCPretty::Term.color?,
+  formatter: XCPretty::Simple
+}
+
+OptionParser.new do |opts|
+  opts.banner = "Usage: xcodebuild [options] | xcpretty"
+  opts.on('-i', '--input PATH', 'Use formatter returned from evaluating the specified Ruby file') do |path|
+    printer_opts[:formatter] = XCPretty.load_custom_class(path)
+  end
+  opts.on('-o', '--output PATH', 'Write report output to PATH') do |path|
+    unless opts = report_options.last
+      XCPretty.exit_with_error('Expected report format to be specified before output path')
+    end
+    opts[:path] = path
+  end
+  opts.on_tail('-h', '--help', 'Show this message') { puts opts; exit }
+  opts.on_tail("-v", "--version", "Show version") { puts XCPretty::VERSION; exit }
+  opts.parse!
+
+  if STDIN.tty?
+    XCPretty.exit_with_error(opts.help)
+  end
+end
+
+printer = XCPretty::Printer.new(printer_opts)
+reporters = report_classes.compact.each_with_index.map { |k, i| k.new(report_options[i]) }
+
+STDIN.each_line do |line|
+  printer.pretty_print(line)
+  reporters.each { |r| r.handle(line) }
+end
+
+printer.finish
+reporters.each(&:finish)
+

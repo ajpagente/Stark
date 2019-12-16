@@ -136,7 +136,7 @@
 
           <section class="heading">
 
-            <h3 class="title"><%= platform %></h3>
+            <h3 class="title"><%= platform %> - [<%= test_suites[:test_count] %> tests, <%= test_suites[:fail_count] %> failures]</h3>
           </section>
     <section id="test-suites">
 
@@ -191,6 +191,6 @@
     </section>
     <% end %>
     </section>
-    <footer>Report generated with <a href="https://github.com/supermarin/xcpretty">xcpretty</a></footer>
+    <footer>Report generated with <a href="https://github.com/ajpagente/spark">spark</a></footer>
   </body>
 </html>

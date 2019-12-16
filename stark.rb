@@ -10,5 +10,7 @@ html.format_passing_test("iPad 6 iOS 10.1","RACCommandSpec", "_tupleByAddingObje
 
 html.format_passing_test("iPhone 8 iOS 10.1","ABCComSpec", "_tupleByAddingObject__should_add_a_nil_object", "0.121")
 html.format_passing_test("iPhone 8 iOS 10.1","RACCommandSpec", "_tupleByAddingObject__should_add_a_nil_object", "0.121")
+html.format_passing_test("iPhone 8 iOS 10.1","RACCommandSpec", "_tupleByAddingObject__should_add_a_nil_object", "0.121")
+html.format_passing_test("iPhone 8 iOS 10.1","RACCommandSpec", "_tupleByAddingObject__should_add_a_nil_object", "0.121")
 html.write_report
 

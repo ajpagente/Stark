@@ -42,6 +42,29 @@ module Stark
       end
     end  
 
+    def count_tests_per_platform
+      @test_platforms.each do |platform, test_suites|
+        test_count = 0
+        fail_count = 0
+        next if platform.is_a?(Symbol)
+        test_suites.each do |suite, info|
+          next if suite.is_a?(Symbol)
+          test_count +=  info[:tests].size
+          info.each do |key, tests|
+            next unless tests.is_a?(Array)
+            tests.each do |test|
+              next if test.is_a?(Symbol)
+              if test.key?(:failing)
+                fail_count += 1
+              end
+            end
+          end
+        end
+        @test_platforms[platform][:test_count] = test_count
+        @test_platforms[platform][:fail_count] = fail_count
+      end
+    end
+
     def write_report
       File.open(FILEPATH, 'w') do |f|
          product = @product
@@ -49,7 +72,7 @@ module Stark
          platform_count = @test_platforms.size
          count_failing_platforms
          platform_fail_count  = @platform_fail_count
-         test_count  = @test_count
+         count_tests_per_platform
          erb = ERB.new(File.open(TEMPLATE, 'r').read)
          f.write erb.result(binding)
       end
