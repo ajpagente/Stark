@@ -7,8 +7,8 @@ module Stark
     FILEPATH = 'tests.html'
     TEMPLATE = 'assets/report.html.erb'
     
-    def initialize
-      @product = 'TMD iOS 2.4.1'
+    def initialize(product)
+      @product = product
       @test_platforms = {}
       @test_suites = {}
       @platform_count = 0
