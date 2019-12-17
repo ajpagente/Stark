@@ -4,54 +4,48 @@ if RUBY_VERSION < '2.0.0'
   abort "error: Stark requires Ruby 2.0.0 or higher."
 end
 
-if $PROGRAM_NAME == __FILE__
-  $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
-end
-require 'xcpretty'
+#if $PROGRAM_NAME == __FILE__
+#  $LOAD_PATH.unshift File.expand_path('../', __FILE__)
+#end
+
+require_relative '../stark/reporter/html'
+require_relative '../stark/parser/csvparser'
 require 'optparse'
 
-report_options = []
-report_classes = []
-report_formats = {
-  "junit"                     => XCPretty::JUnit,
-  "html"                      => XCPretty::HTML,
-  "json-compilation-database" => XCPretty::JSONCompilationDatabase
-}
-
-printer_opts = {
-  unicode: XCPretty::Term.unicode?,
-  colorize: XCPretty::Term.color?,
-  formatter: XCPretty::Simple
-}
+options = {}
+options[:reporthtml] = 'tests.html'
 
 OptionParser.new do |opts|
-  opts.banner = "Usage: xcodebuild [options] | xcpretty"
-  opts.on('-i', '--input PATH', 'Use formatter returned from evaluating the specified Ruby file') do |path|
-    printer_opts[:formatter] = XCPretty.load_custom_class(path)
+  opts.banner = "stark -p PRODUCT -i FOLDERPATH"
+  opts.on('-i', '--input FOLDERPATH', 'The folder where Stark searches for csv files to parse.') do |path|
+    options[:folderpath] = path
   end
-  opts.on('-o', '--output PATH', 'Write report output to PATH') do |path|
-    unless opts = report_options.last
-      XCPretty.exit_with_error('Expected report format to be specified before output path')
-    end
-    opts[:path] = path
+  opts.on('-o', '--output FILE.html', 'The html test report. If not specified, tests.html is generated in the current directory.') do |path|
+    options[:reporthtml] = path
+  end
+  opts.on('-p', '--product PRODUCT', 'The name of the product. Typically it includes the OS and version. Example: Stark iOS 1.2.3') do |prod|
+    options[:product] = prod
   end
   opts.on_tail('-h', '--help', 'Show this message') { puts opts; exit }
   opts.on_tail("-v", "--version", "Show version") { puts XCPretty::VERSION; exit }
   opts.parse!
 
-  if STDIN.tty?
-    XCPretty.exit_with_error(opts.help)
-  end
 end
 
-printer = XCPretty::Printer.new(printer_opts)
-reporters = report_classes.compact.each_with_index.map { |k, i| k.new(report_options[i]) }
-
-STDIN.each_line do |line|
-  printer.pretty_print(line)
-  reporters.each { |r| r.handle(line) }
+# Check for mandatory options
+if not (options[:product] && options[:folderpath])
+  puts 'ERROR: Product and folder path is mandatory'
+  exit(1)
 end
 
-printer.finish
-reporters.each(&:finish)
+file_search_pattern = options[:folderpath] + "/*.csv"
+csvs = Dir.glob(file_search_pattern)
+
+html = Stark::HTML.new(options[:product])
+parser = Stark::CSVParser.new(html)
+csvs.each do |csv_file|
+  parser.parse(csv_file)
+end
+parser.reporter.write_report(options[:reporthtml])
+
 

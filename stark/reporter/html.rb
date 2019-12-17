@@ -5,7 +5,7 @@ require 'pathname'
 module Stark
   class HTML
     FILEPATH = 'tests.html'
-    TEMPLATE = 'assets/report.html.erb'
+    TEMPLATE = '../assets/report.html.erb'
     
     def initialize(product)
       @product = product
