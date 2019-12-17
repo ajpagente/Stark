@@ -65,8 +65,8 @@ module Stark
       end
     end
 
-    def write_report
-      File.open(FILEPATH, 'w') do |f|
+    def write_report(filepath=FILEPATH)
+      File.open(filepath, 'w') do |f|
          product = @product
          test_platforms = @test_platforms
          platform_count = @test_platforms.size
