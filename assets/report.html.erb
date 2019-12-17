@@ -11,7 +11,7 @@
       header:before, header:after { content:""; display:table;}
       header:after { clear:both;}
       a:link { color: #A1D761;}
-      footer { clear: both;position: relative;z-index: 10;height: 40px;margin-top: -10px; margin-left:30px; font-size:12px;}
+      footer { clear: both;position: relative;z-index: 10;height: 40px;margin-top: 10px; margin-left:30px; font-size:12px;}
       table { width:100%; border-collapse: collapse;}
       tr td:first-child { width:7%}
       .left { float: left; margin-left:30px;}
@@ -71,6 +71,7 @@
       var deselect = function(element) { return element.classList.remove("selected");}
       var select = function(element) { return element.classList.add("selected");}
       var toggle = function(element) { isHidden(element) ? show(element) : hide(element);};
+      var togglePlatform = function(heading) { toggle(heading.parentNode.children[1]);};
       var toggleTests = function(heading) { toggle(heading.parentNode.children[1]);};
       var toggleDetails = function(detailClass) {
         var details = document.querySelectorAll('.' + detailClass);
@@ -134,7 +135,7 @@
         <% next if platform.is_a?(Symbol) %>
         <section class="test-platform <%= test_suites.key?(:failing) ? 'failing' : 'passing'%>" id="<%= platform %>">
 
-          <section class="heading">
+          <section class="heading" onclick="togglePlatform(this);">
 
             <h3 class="title"><%= platform %> - [<%= test_suites[:test_count] %> tests, <%= test_suites[:fail_count] %> failures]</h3>
           </section>
