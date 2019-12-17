@@ -5,8 +5,8 @@ require 'pathname'
 module Stark
   class HTML
     FILEPATH = 'tests.html'
-    TEMPLATE = '../assets/report.html.erb'
-    
+    TEMPLATE = File.expand_path('../../../assets/report.html.erb', __FILE__) 
+  
     def initialize(product)
       @product = product
       @test_platforms = {}
