@@ -10,6 +10,7 @@ end
 
 require_relative '../stark/reporter/html'
 require_relative '../stark/parser/csvparser'
+require_relative '../stark/version'
 require 'optparse'
 
 options = {}
@@ -27,7 +28,7 @@ OptionParser.new do |opts|
     options[:product] = prod
   end
   opts.on_tail('-h', '--help', 'Show this message') { puts opts; exit }
-  opts.on_tail("-v", "--version", "Show version") { puts XCPretty::VERSION; exit }
+  opts.on_tail("-v", "--version", "Show version") { puts Stark::VERSION; exit }
   opts.parse!
 
 end
