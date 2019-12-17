@@ -18,6 +18,7 @@ module Stark
       table = CSV.parse(File.read(@filename), headers:true)
       # populate reporter with tests
       table.each do |test|
+        next if not is_target_product?(test["product"])
         status = test["status"]
         # strip removes the newline after status
         if status.strip.eql?('PASS')
@@ -38,8 +39,15 @@ module Stark
 
     private
 
+    def is_target_product?(product)
+      product_in_csv = strip_string(product).downcase
+      product_in_reporter = strip_string(reporter.product).downcase
+      return true if product_in_reporter.eql?(product_in_csv)
+      return false
+    end
+
     def is_valid_header?(header)
-      header = header.gsub(/\s+/,"")
+      header = strip_string(header)
       if header.downcase.eql?(VALID_HEADER.downcase)
         return true
       end
@@ -68,6 +76,10 @@ module Stark
         return false
       end
       return true
-    end    
+    end   
+
+    def strip_string(string)
+      return string.gsub(/\s+/,"")
+    end 
   end
 end

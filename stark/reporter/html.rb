@@ -6,7 +6,9 @@ module Stark
   class HTML
     FILEPATH = 'tests.html'
     TEMPLATE = File.expand_path('../../../assets/report.html.erb', __FILE__) 
-  
+    
+    attr_reader :product
+ 
     def initialize(product)
       @product = product
       @test_platforms = {}
