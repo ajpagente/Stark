@@ -61,7 +61,9 @@ module Stark
         content.each_line{ |line|
           if line_num == 1
             if not is_valid_header?(line)
-              puts "Invalid header"
+              puts "ERROR: Invalid header in #{@filename}"
+              puts "Expected: #{VALID_HEADER}"
+              puts "Actual  : #{line}"
               return false
             end
           end
@@ -72,7 +74,7 @@ module Stark
           line_num += 1
         }
       else
-        puts 'Invalid encoding'
+        puts "Invalid encoding in #{@filename}"
         return false
       end
       return true
