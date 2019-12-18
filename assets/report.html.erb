@@ -130,9 +130,10 @@
       </section>
     </header>
     <section id="test-platforms">
-    
+      <% platform_count = 0 %>   
       <% test_platforms.each do |platform, test_suites| %>
         <% next if platform.is_a?(Symbol) %>
+          <% platform_count += 1 %>   
         <section class="test-platform <%= test_suites.key?(:failing) ? 'failing' : 'passing'%>" id="<%= platform %>">
 
           <section class="heading" onclick="togglePlatform(this);">
@@ -141,8 +142,10 @@
           </section>
     <section id="test-suites">
 
+      <% suite_count = 0 %>   
       <% test_suites.each do |name, info| %>
         <% next if name.is_a?(Symbol) %>
+        <% suite_count += 1%>
         <section class="test-suite <%= info[:failing] ? 'failing' : 'passing'%>" id="<%= name %>">
           <section class="heading" onclick="toggleTests(this);">
             <h3 class="title"><%= name %></h3>
@@ -151,6 +154,7 @@
             <table>
             <% info[:tests].each_with_index do |test, index| %>
               <% detail_class = test[:name].gsub(/\s/,'') %>
+              <% detail_class = "s#{platform_count.to_s}#{suite_count}_"+detail_class %>
               <tr class="test <%= test[:failing] ? 'failing' : 'passing'%> <%= index % 2 != 0 ? 'odd' :''%>"  onclick="toggleDetails('<%= detail_class %>');">
                 <td>
                   <% if test[:time] %>
