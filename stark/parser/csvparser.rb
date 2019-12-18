@@ -2,7 +2,7 @@ require 'csv'
 
 module Stark
   class CSVParser
-    VALID_HEADER="\"product\",\"platform\",\"testsuite\",\"test\",\"time\",\"reason\",\"status\""
+    VALID_HEADER="product,platform,testsuite,test,time,reason,status"
     SEP = ','
     COLUMN_COUNT = 7
  
