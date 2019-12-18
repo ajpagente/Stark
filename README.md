@@ -11,7 +11,7 @@ NOTE: Stark only supports macOS and Linux at the moment.
 Clone or download Stark from [this](https://github.com/ajpagente/Stark) repository.
 Set your path to point to *Stark/bin* as shown.
 ```
-$ export "~/Desktop/Stark/bin:$PATH"
+$ export PATH=$PATH:~/Desktop/Stark/bin
 ``` 
 
 You are now ready to use Stark from the terminal.
