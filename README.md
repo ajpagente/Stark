@@ -47,9 +47,9 @@ csv check covers the following:
 Refer to **samples/template.csv** for the header format
 
 ### Product match
-The product indicated in the command-line option has to match the product in the test result. Any non-matching test result will be skipped.
+The product specified in the command-line option has to match the product in the test result. Any non-matching test result will be skipped.
 
-The match is not case-sensitive and white space is ignored in the comparison.
+The match is not case-sensitive and white space is ignored in the comparison. Some examples given below to illustrate how product matching works.
 ```
 Example: -p "ABC iOS 1.2.3"
 "ABC iOS 1.2.3" => match
@@ -59,4 +59,5 @@ Example: -p "ABC iOS 1.2.3"
 ```
 ## Wishlist
 * Windows support
+* Improve error messages
 * Add logs
