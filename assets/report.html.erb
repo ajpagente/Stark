@@ -154,7 +154,7 @@
             <table>
             <% info[:tests].each_with_index do |test, index| %>
               <% detail_class = test[:name].gsub(/\s/,'') %>
-              <% detail_class = "s#{platform_count.to_s}#{suite_count}_"+detail_class %>
+              <% detail_class = "s#{platform_count}#{suite_count}_"+detail_class %>
               <tr class="test <%= test[:failing] ? 'failing' : 'passing'%> <%= index % 2 != 0 ? 'odd' :''%>"  onclick="toggleDetails('<%= detail_class %>');">
                 <td>
                   <% if test[:time] %>
