@@ -6,7 +6,7 @@
 Stark is a test report generator that takes test results in csv format and generates an HTML report. The report template and code is based on [xcpretty](https://github.com/xcpretty/xcpretty). However, unlike xcpretty that is designed to use with xcodebuild, Stark is independent of development platform. You can generate any test report from a csv defined in a specific format.
 
 ## Installation
-NOTE: Stark only supports macOS and Linux at the moment.
+:information_source: Stark only supports **macOS** and **Linux**.
 
 Clone or download Stark from [this](https://github.com/ajpagente/Stark) repository.
 Set your path to point to *Stark/bin* as shown.
