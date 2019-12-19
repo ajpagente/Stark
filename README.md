@@ -8,8 +8,8 @@ Stark is a test report generator that takes test results in csv format and gener
 ## Installation
 :information_source: Stark only supports **macOS** and **Linux**.
 
-Clone or download Stark from [this](https://github.com/ajpagente/Stark) repository.
-Set your path to point to *Stark/bin* as shown.
+Clone or download Stark from [this](https://github.com/ajpagente/Stark) repository then
+set `PATH` to point to *Stark/bin* as shown.
 ```
 $ export PATH=$PATH:~/Desktop/Stark/bin
 ``` 
@@ -26,7 +26,7 @@ stark -p PRODUCT -i FOLDERPATH
     -h, --help                       Show this message
     -v, --version                    Show version
 ```
-
+:point_right: **--product** and **--input** are mandatory options
 ### Example
 ```
 $ stark -p "ABC iOS 1.2.3" -i "test_result" -o "ABCTestReport.html"
