@@ -34,22 +34,22 @@ $ stark -p "ABC iOS 1.2.3" -i "test_result" -o "ABCTestReport.html"
 
 ## How it works
 ### Parsing csv
-Stark searches for file with .csv extension in FOLDERPATH. Stark then parses each csv file to extract the test results and generates an html report.
+Stark searches for files with .csv extension in FOLDERPATH. Stark then parses each csv file to extract the test results and generate an HTML report.
 
 ### csv checks
-csv check covers the following:
+The csv check includes the following:
 * The file is utf-8 encoded
 * The header matches the required format
 * The test result uses a comma separator
 * The test result has number of items matching the number of header items
 
 ### Valid header
-Refer to **samples/template.csv** for the header format
+Refer to **samples/template.csv** for the header format.
 
-### Product match
+### Product matching
 The product specified in the command-line option has to match the product in the test result. Any non-matching test result will be skipped.
 
-The match is not case-sensitive and white space is ignored in the comparison. Some examples given below to illustrate how product matching works.
+Product matching is not case-sensitive and white space is ignored. Some examples are given below to illustrate how product matching works.
 ```
 Example: -p "ABC iOS 1.2.3"
 "ABC iOS 1.2.3" => match
