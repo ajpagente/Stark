@@ -61,4 +61,4 @@ Example: -p "ABC iOS 1.2.3"
 * Notes section in the report - enables free form notes (ex. env config)
 * Windows support
 * Improve error messages
-* Add logs
+* Verbose logs
