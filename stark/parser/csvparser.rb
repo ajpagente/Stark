@@ -27,7 +27,7 @@ module Stark
                                        test["test"],
                                        test["time"]
                                       )
-        else
+        elsif status.strip.eql?('FAIL')
           reporter.format_failing_test(test["platform"],
                                        test["testsuite"],
                                        test["test"],
