@@ -70,7 +70,7 @@ module Stark
             end
           end
           if line.count(SEP) < COLUMN_COUNT-1
-            puts "Invalid separator at #{line_num}"
+            puts "ERROR: Invalid separator at #{line_num} in #{@filename}"
             return false
           end
           line_num += 1
