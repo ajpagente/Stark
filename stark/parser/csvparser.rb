@@ -15,7 +15,8 @@ module Stark
     def parse(filename)
       @filename = filename
       return false unless is_valid_csv?
-      table = CSV.parse(File.read(@filename), headers:true)
+      content = File.read(@filename)
+      table = CSV.parse(content.strip, headers:true)
       # populate reporter with tests
       table.each do |test|
         next if not is_target_product?(test["product"])
@@ -59,6 +60,7 @@ module Stark
       if content.valid_encoding?
         line_num = 1
         content.each_line{ |line|
+          next if line.length < COLUMN_COUNT
           if line_num == 1
             if not is_valid_header?(line)
               puts "ERROR: Invalid header in #{@filename}"
