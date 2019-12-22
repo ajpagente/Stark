@@ -17,6 +17,7 @@ module Stark
       @platform_fail_count = 0
       @test_count = 0
       @fail_count = 0
+      @notes = ""
     end
 
     def format_passing_test(platform, suite, test_case, time)
@@ -26,6 +27,10 @@ module Stark
     def format_failing_test(platform, suite, test_case, reason)
       add_test(platform, suite, name: test_case, failing: true,
                                 reason: reason, screenshots: [])
+    end
+
+    def format_notes(notes)
+      @notes = notes
     end
 
     def add_test(platform_name, suite_name, data)
@@ -70,6 +75,7 @@ module Stark
     def write_report(filepath=FILEPATH)
       File.open(filepath, 'w') do |f|
          product = @product
+         notes = @notes
          test_platforms = @test_platforms
          platform_count = @test_platforms.size
          count_failing_platforms

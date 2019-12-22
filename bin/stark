@@ -10,6 +10,7 @@ end
 
 require_relative '../stark/reporter/html'
 require_relative '../stark/parser/csvparser'
+require_relative '../stark/parser/notesparser'
 require_relative '../stark/version'
 require 'optparse'
 
@@ -39,14 +40,24 @@ if not (options[:product] && options[:folderpath])
   exit(1)
 end
 
-file_search_pattern = options[:folderpath] + "/*.csv"
-csvs = Dir.glob(file_search_pattern)
+csv_search_pattern = options[:folderpath] + "/*.csv"
+csvs = Dir.glob(csv_search_pattern)
 
 html = Stark::HTML.new(options[:product])
-parser = Stark::CSVParser.new(html)
+csvparser = Stark::CSVParser.new(html)
 csvs.each do |csv_file|
-  parser.parse(csv_file)
+  csvparser.parse(csv_file)
 end
-parser.reporter.write_report(options[:reporthtml])
+
+notes_search_pattern = options[:folderpath] + "/notes.sta"
+notes_file = Dir.glob(notes_search_pattern)
+if notes_file.size != 0 
+  notesparser = Stark::NotesParser.new()
+  notesparser.parse(notes_file[0])
+  notes = notesparser.notes
+  csvparser.reporter.format_notes(notes)
+end
+
+csvparser.reporter.write_report(options[:reporthtml])
 
 
