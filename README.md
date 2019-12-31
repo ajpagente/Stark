@@ -58,7 +58,7 @@ Example: -p "ABC iOS 1.2.3"
 "ABC iOS 1.2.4" => does not match
 ```
 ## Wishlist
-* Notes section in the report - enables free form notes (ex. env config)
 * Windows support
 * Improve error messages
 * Verbose logs
+* Use product from test result (-p becomes optional)
