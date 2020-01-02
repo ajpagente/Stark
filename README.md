@@ -33,7 +33,7 @@ $ stark -p "ABC iOS 1.2.3" -i test_result -o ABCTestReport.html
 ```
 
 ## Test Report
-The following are screenshots of a test report generated with [sample-results](https://github.com/ajpagente/Stark/tree/master/samples/sample-results)
+The following are screenshots of a test report generated from [sample-results](https://github.com/ajpagente/Stark/tree/master/samples/sample-results)
 
 <p>
   <img src="doc-assets/report_all.png" width="500" max-width="90%" alt="Stark" />
