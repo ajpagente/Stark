@@ -1,4 +1,4 @@
-"product","platform","testsuite","test","time","reason","status"
+product,platform,testsuite,test,time,reason,status
 "ABC iOS 1.2.3","iPhone 8 iOS 12.1","Suite 01","test01","0.100","",PASS 
 "ABC iOS 1.2.3","iPhone 8 iOS 12.1","Suite 01","test02","0.100","",PASS 
 "ABC iOS 1.2.3","iPhone 8 iOS 12.1","Suite 01","test03","0.100","",PASS 

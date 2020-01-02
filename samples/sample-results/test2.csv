@@ -1,0 +1,3 @@
+product,platform,testsuite,test,time,reason,status
+"ABC iOS 1.2.3","iPad Mini iOS 10.0","Suite 01","test01","0.100","",PASS 
+"ABC iOS 1.2.3","iPad Mini iOS 10.0","Suite 01","test02","0.100","",PASS 

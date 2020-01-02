@@ -29,8 +29,16 @@ stark -p PRODUCT -i FOLDERPATH
 :point_right: **--product** and **--input** are mandatory options
 ### Example
 ```
-$ stark -p "ABC iOS 1.2.3" -i "test_result" -o "ABCTestReport.html"
+$ stark -p "ABC iOS 1.2.3" -i test_result -o ABCTestReport.html
 ```
+
+## Test Report
+The following are screenshots of a test report generated with [sample-results](https://github.com/ajpagente/Stark/sample-results)
+
+<p>
+  <img src="doc-assets/report-all.png" width="350" max-width="90%" alt="Stark" />
+</p>
+
 
 ## How it works
 ### Parsing csv
