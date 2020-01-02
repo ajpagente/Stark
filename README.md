@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="stark.png" width="350" max-width="90%" alt="Stark" />
+  <img src="doc-assets/stark.png" width="350" max-width="90%" alt="Stark" />
 </p>
 
 ## Generate test reports with ease
@@ -57,6 +57,14 @@ Example: -p "ABC iOS 1.2.3"
 "ABCiOS1.2.3" => match
 "ABC iOS 1.2.4" => does not match
 ```
+
+### Test Notes
+A notes section is shown at the beginning of the test results. The notes field can be used to provide addional information such as test environment, application configuration tested, and pretty much anything you want.
+
+The notes are read from the file named **notes.sta** which must be located in the same directory as the test csv.
+
+The notes are text-based with html tags for text formatting. There is no pre-processing of the file. The notes.sta content is read and inserted to the notes section. 
+
 ## Wishlist
 * Windows support
 * Improve error messages
